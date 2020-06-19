@@ -1,0 +1,19 @@
+// Copyright (c) 2020 Flucto Team and others. Licensed under the MIT Licence.
+// Copyright (c) ppy Pty Ltd <contact@ppy.sh>. Licensed under the MIT Licence.
+// See the LICENCE file in the repository root for full licence text.
+
+using flucto.Bindables;
+
+namespace flucto.Localisation
+{
+    /// <summary>
+    /// An <see cref="IBindable{T}"/> which has its value set depending on the current locale of the <see cref="LocalisationManager"/>.
+    /// </summary>
+    public interface ILocalisedBindableString : IBindable<string>
+    {
+        /// <summary>
+        /// Sets the original, un-localised text.
+        /// </summary>
+        LocalisedString Text { set; }
+    }
+}

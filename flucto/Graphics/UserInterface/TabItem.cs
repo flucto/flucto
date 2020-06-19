@@ -1,0 +1,80 @@
+﻿// Copyright (c) 2020 Flucto Team and others. Licensed under the MIT Licence.
+// Copyright (c) ppy Pty Ltd <contact@ppy.sh>. Licensed under the MIT Licence.
+// See the LICENCE file in the repository root for full licence text.
+
+using System;
+using flucto.Bindables;
+using flucto.Graphics.Containers;
+using flucto.Input.Events;
+
+namespace flucto.Graphics.UserInterface
+{
+    public abstract class TabItem : ClickableContainer
+    {
+        /// <summary>
+        /// If false, ths <see cref="TabItem{T}"/> cannot be removed from its <see cref="TabControl{T}"/>.
+        /// </summary>
+        public abstract bool IsRemovable { get; }
+    }
+
+    public abstract class TabItem<T> : TabItem
+    {
+        internal Action<TabItem<T>> ActivationRequested;
+
+        internal Action<TabItem<T>> PinnedChanged;
+
+        public override bool IsPresent => base.IsPresent || Y == 0;
+
+        public override bool IsRemovable => true;
+
+        /// <summary>
+        /// When true, this tab can be switched to using PlatformAction.DocumentPrevious and PlatformAction.DocumentNext. Otherwise, it will be skipped.
+        /// </summary>
+        public virtual bool IsSwitchable => true;
+
+        public readonly T Value;
+
+        protected TabItem(T value)
+        {
+            Value = value;
+
+            Active.ValueChanged += active_ValueChanged;
+        }
+
+        private void active_ValueChanged(ValueChangedEvent<bool> args)
+        {
+            if (args.NewValue)
+                OnActivated();
+            else
+                OnDeactivated();
+        }
+
+        private bool pinned;
+
+        public bool Pinned
+        {
+            get => pinned;
+            set
+            {
+                if (pinned == value) return;
+
+                pinned = value;
+                PinnedChanged?.Invoke(this);
+            }
+        }
+
+        protected abstract void OnActivated();
+        protected abstract void OnDeactivated();
+
+        public readonly BindableBool Active = new BindableBool();
+
+        protected override bool OnClick(ClickEvent e)
+        {
+            base.OnClick(e);
+            ActivationRequested?.Invoke(this);
+            return true;
+        }
+
+        public override string ToString() => $"{base.ToString()} value: {Value}";
+    }
+}

@@ -1,0 +1,33 @@
+﻿// Copyright (c) 2020 Flucto Team and others. Licensed under the MIT Licence.
+// Copyright (c) ppy Pty Ltd <contact@ppy.sh>. Licensed under the MIT Licence.
+// See the LICENCE file in the repository root for full licence text.
+
+using System;
+using System.Runtime.InteropServices;
+
+namespace flucto.Platform.MacOS.Native
+{
+    internal static class Class
+    {
+        [DllImport(Cocoa.LIB_OBJ_C)]
+        private static extern IntPtr class_getName(IntPtr handle);
+
+        [DllImport(Cocoa.LIB_OBJ_C)]
+        private static extern IntPtr class_replaceMethod(IntPtr classHandle, IntPtr selector, IntPtr method, string types);
+
+        [DllImport(Cocoa.LIB_OBJ_C)]
+        private static extern IntPtr objc_getClass(string name);
+
+        public static IntPtr Get(string name)
+        {
+            var id = objc_getClass(name);
+            if (id == IntPtr.Zero)
+                throw new ArgumentException("Unknown class: " + name);
+
+            return id;
+        }
+
+        public static void RegisterMethod(IntPtr handle, Delegate d, string selector, string typeString) =>
+            class_replaceMethod(handle, Selector.Get(selector), Marshal.GetFunctionPointerForDelegate(d), typeString);
+    }
+}
