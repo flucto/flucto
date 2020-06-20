@@ -11,7 +11,7 @@ using flucto.Bindables;
 
 namespace flucto.Threading
 {
-    public class GameThread
+    public class AppThread
     {
         internal const double DEFAULT_ACTIVE_HZ = 1000;
         internal const double DEFAULT_INACTIVE_HZ = 60;
@@ -58,7 +58,7 @@ namespace flucto.Threading
             }
         }
 
-        public static string PrefixedThreadNameFor(string name) => $"{nameof(GameThread)}.{name}";
+        public static string PrefixedThreadNameFor(string name) => $"{nameof(AppThread)}.{name}";
 
         public bool Running => Thread.IsAlive;
 
@@ -70,7 +70,7 @@ namespace flucto.Threading
 
         public readonly string Name;
 
-        internal GameThread(Action onNewFrame = null, string name = "unknown", bool monitorPerformance = true)
+        internal AppThread(Action onNewFrame = null, string name = "unknown", bool monitorPerformance = true)
         {
             OnNewFrame = onNewFrame;
 
