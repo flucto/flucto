@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 namespace flucto.Threading
 {
-    public class UpdateThread : GameThread
+    public class UpdateThread : AppThread
     {
         public UpdateThread(Action onNewFrame)
             : base(onNewFrame, "Update")

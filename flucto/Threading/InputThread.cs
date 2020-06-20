@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace flucto.Threading
 {
-    public class InputThread : GameThread
+    public class InputThread : AppThread
     {
         public InputThread()
             : base(name: "Input")

@@ -101,7 +101,7 @@ namespace flucto.Graphics.Performance
             }
         }
 
-        public FrameStatisticsDisplay(GameThread thread)
+        public FrameStatisticsDisplay(AppThread thread)
         {
             Name = thread.Name;
             monitor = thread.Monitor;

@@ -11,7 +11,7 @@ namespace flucto.Graphics.Performance
 {
     internal class PerformanceOverlay : FillFlowContainer<FrameStatisticsDisplay>, IStateful<FrameStatisticsMode>
     {
-        private readonly IEnumerable<GameThread> threads;
+        private readonly IEnumerable<AppThread> threads;
         private FrameStatisticsMode state;
 
         public event Action<FrameStatisticsMode> StateChanged;
@@ -38,7 +38,7 @@ namespace flucto.Graphics.Performance
                         if (!initialised)
                         {
                             initialised = true;
-                            foreach (GameThread t in threads)
+                            foreach (AppThread t in threads)
                                 Add(new FrameStatisticsDisplay(t) { State = state });
                         }
 
@@ -53,7 +53,7 @@ namespace flucto.Graphics.Performance
             }
         }
 
-        public PerformanceOverlay(IEnumerable<GameThread> threads)
+        public PerformanceOverlay(IEnumerable<AppThread> threads)
         {
             this.threads = threads;
             Direction = FillDirection.Vertical;

@@ -9,7 +9,7 @@ using flucto.Audio;
 
 namespace flucto.Threading
 {
-    public class AudioThread : GameThread
+    public class AudioThread : AppThread
     {
         public AudioThread()
             : base(name: "Audio")

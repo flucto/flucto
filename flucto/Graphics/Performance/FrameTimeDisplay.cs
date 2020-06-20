@@ -19,11 +19,11 @@ namespace flucto.Graphics.Performance
         private readonly SpriteText counter;
 
         private readonly ThrottledFrameClock clock;
-        private readonly GameThread thread;
+        private readonly AppThread thread;
 
         public bool Counting = true;
 
-        public FrameTimeDisplay(ThrottledFrameClock clock, GameThread thread)
+        public FrameTimeDisplay(ThrottledFrameClock clock, AppThread thread)
         {
             this.clock = clock;
             this.thread = thread;

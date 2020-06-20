@@ -29,13 +29,13 @@ namespace flucto.Development
         }
 
         private static readonly ThreadLocal<bool> is_update_thread = new ThreadLocal<bool>(() =>
-            Thread.CurrentThread.Name == GameThread.PrefixedThreadNameFor("Update"));
+            Thread.CurrentThread.Name == AppThread.PrefixedThreadNameFor("Update"));
 
         private static readonly ThreadLocal<bool> is_draw_thread = new ThreadLocal<bool>(() =>
-            Thread.CurrentThread.Name == GameThread.PrefixedThreadNameFor("Draw"));
+            Thread.CurrentThread.Name == AppThread.PrefixedThreadNameFor("Draw"));
 
         private static readonly ThreadLocal<bool> is_audio_thread = new ThreadLocal<bool>(() =>
-            Thread.CurrentThread.Name == GameThread.PrefixedThreadNameFor("Audio"));
+            Thread.CurrentThread.Name == AppThread.PrefixedThreadNameFor("Audio"));
 
         public static bool IsUpdateThread => is_update_thread.Value;
 

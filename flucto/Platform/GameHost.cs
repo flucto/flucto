@@ -122,15 +122,15 @@ namespace flucto.Platform
         /// </summary>
         public virtual bool CapsLockEnabled => false;
 
-        private readonly List<GameThread> threads = new List<GameThread>();
+        private readonly List<AppThread> threads = new List<AppThread>();
 
-        public IEnumerable<GameThread> Threads => threads;
+        public IEnumerable<AppThread> Threads => threads;
 
         /// <summary>
         /// Register a thread to be monitored and tracked by this <see cref="GameHost"/>
         /// </summary>
         /// <param name="thread">The thread.</param>
-        public void RegisterThread(GameThread thread)
+        public void RegisterThread(AppThread thread)
         {
             threads.Add(thread);
             thread.IsActive.BindTo(IsActive);
@@ -142,7 +142,7 @@ namespace flucto.Platform
         /// Unregister a previously registered thread.<see cref="GameHost"/>
         /// </summary>
         /// <param name="thread">The thread.</param>
-        public void UnregisterThread(GameThread thread)
+        public void UnregisterThread(AppThread thread)
         {
             if (!threads.Remove(thread))
                 return;
@@ -151,8 +151,8 @@ namespace flucto.Platform
             thread.UnhandledException = null;
         }
 
-        public GameThread DrawThread;
-        public GameThread UpdateThread;
+        public AppThread DrawThread;
+        public AppThread UpdateThread;
         public InputThread InputThread;
         public AudioThread AudioThread;
 

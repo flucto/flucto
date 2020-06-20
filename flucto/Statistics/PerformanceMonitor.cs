@@ -45,11 +45,11 @@ namespace flucto.Statistics
 
         internal readonly ThrottledFrameClock Clock;
 
-        internal readonly GameThread Thread;
+        internal readonly AppThread Thread;
 
         public double FrameAimTime => 1000.0 / (Clock?.MaximumUpdateHz ?? double.MaxValue);
 
-        internal PerformanceMonitor(GameThread thread, IEnumerable<StatisticsCounterType> counters)
+        internal PerformanceMonitor(AppThread thread, IEnumerable<StatisticsCounterType> counters)
         {
             Clock = thread.Clock;
             Thread = thread;
