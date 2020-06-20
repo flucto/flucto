@@ -25,7 +25,7 @@ using flucto.Platform;
 
 namespace flucto
 {
-    public abstract class Game : Container, IKeyBindingHandler<FrameworkAction>, IHandleGlobalKeyboardInput
+    public abstract class App : Container, IKeyBindingHandler<FrameworkAction>, IHandleGlobalKeyboardInput
     {
         public IWindow Window => Host?.Window;
 
